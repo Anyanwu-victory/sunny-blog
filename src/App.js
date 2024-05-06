@@ -6,13 +6,15 @@ import Blog from "./pages/Blog";
 import Error from "./pages/Error";
 import Footer from "./pages/Footer";
 import SinglePost from "./pages/SinglePost";
+import About from "./pages/About";
 
 function App() {
   return (
     <BrowserRouter>
          <Header/>
          <Routes>
-             <Route path="/" element={<Home/>}/>      
+             <Route path="/" element={<Home/>}/> 
+             <Route path="/about" element={<About/>}/>     
              <Route path="/blog" element={<Blog/>}/> 
              <Route path="/blog/:slug" element={<SinglePost/>}/> 
              <Route path="/footer" element={<Footer/>}/>   
