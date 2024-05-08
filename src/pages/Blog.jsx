@@ -12,7 +12,8 @@ const Blog = () => {
         {[...Array(6).keys()].map((index) => (
           <article
             key={index}
-            className="max-w-md mx-auto bg-white border border-gray-200 rounded-lg shadow"
+            className="max-w-md mx-auto bg-white border
+             border-gray-200 rounded-lg shadow"
           >
             <a href="#">
               <img
