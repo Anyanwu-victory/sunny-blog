@@ -3,10 +3,10 @@ import { BrowserRouter, Routes, Route,} from "react-router-dom";
 import Header from "./component/Header";
 import Home from "./container/Home";
 import Blog from "./pages/Blog";
-import Error from "./pages/Error";
 import Footer from "./pages/Footer";
 import SinglePost from "./pages/SinglePost";
 import About from "./pages/About";
+import Error from "./pages/Error";
 
 function App() {
   return (
