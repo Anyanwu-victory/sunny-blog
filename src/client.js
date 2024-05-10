@@ -1,8 +1,8 @@
-import client from "@sanity/client"
+import client, { createClient } from "@sanity/client"
 
-export default client({
-    projectId: "appo4pjk",
+export default createClient({
+    projectId: "m4oqruh7",
     dataset: "production",
     userCdn: true, 
-    apiVersion: "2024-05-03"
+    apiVersion: "2024-05-07"
 })

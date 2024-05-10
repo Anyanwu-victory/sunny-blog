@@ -1,7 +1,9 @@
 
-export const post = `*[_type == "post" ] {
+export const post = `*[__type == "post" ] {
    title,
    slug,
+   category,
+   author,
    body,
    mainImage {
     asset -> {
@@ -12,3 +14,15 @@ export const post = `*[_type == "post" ] {
    }
   }`
   
+  
+export const author = `*[_type == "author" ] {
+    image {
+      asset -> {
+        url
+      }
+    },
+    name,
+    bio,
+    about,
+    info
+  }`
