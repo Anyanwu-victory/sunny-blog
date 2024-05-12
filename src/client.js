@@ -1,6 +1,6 @@
 import client, { createClient } from "@sanity/client"
 
-export default createClient({
+export default client({
     projectId: "m4oqruh7",
     dataset: "production",
     userCdn: true, 

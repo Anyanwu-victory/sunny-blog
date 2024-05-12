@@ -1,30 +1,32 @@
 import React, { useState, useEffect } from "react";
-import { createClient } from "../client";
+import { client } from "../client";
 import { post } from "../utils/data";
-import { Blog } from "../pages"; 
+import Blog from "./Blog";
+
 
 
 const BlogFeed = () => {
-    const [blog,setBlog] = useState(null);
+//     const [posts,setPosts] = useState([]);
 
-    useEffect(() => {
-        const query = post;
+//     useEffect(() => {
+//         const query = post;
   
-        createClient
-          .fetch(query)
-          .then((data) => {
-            setBlog(data);
-          })
-          .catch((error) => {
-              //console.log('Error fetching Content data:', error);
-          })
-      }, [])
+//         client
+//           .fetch(query)
+//           .then((data) => {
+//             setPosts(data);
+//           })
+//           .catch((error) => {
+//               //console.log('Error fetching Content data:', error);
+//           })
+//       }, []);
 
-  return (
-    <div>
-        <Blog post={blog} />
-    </div>
-  )
+      
+// }
+// return (
+//     <Blog/>
+// )
 }
 
-export default BlogFeed
+// export default BlogFeed;
+

@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import {Link, useParams} from "react-router-dom";
 import client from "../client"
-// import BlockContent from "@sanity/block-content-to-react";
+import BlockContent from "@sanity/block-content-to-react";
 
 
 
@@ -47,13 +47,14 @@ const SinglePost = () => {
       }
       
       <p>By Thomas Sankara</p>
-      {/* <div className='md:leading-1'>
+     <div className='md:leading-1'>
+      
         <BlockContent
          blocks={singlePost.body}
-         projectId = ""
+         projectId = "m4oqruh7"
          dataset= "production"
-        />
-      </div> */}
+        /> 
+      </div>
 
       <button>
         <Link to="/blog"> Read more articles</Link>

@@ -1,9 +1,12 @@
 
-export const post = `*[__type == "post" ] {
+export const blog = `*[_type == 'post' ] {
+    _id,
    title,
    slug,
    category,
-   author,
+   author -> {
+    name,
+   },
    body,
    mainImage {
     asset -> {
