@@ -27,18 +27,26 @@ const Header = () => {
   </a>
 
   {/* For Profile and profile dropdown */}
-  <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+  <div className="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
       <button 
       onClick={toggleMenu}
       type="button"
-       className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+       className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4
+        focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" 
+        aria-expanded={isMenuOpen} data-dropdown-toggle="user-dropdown" 
+        data-dropdown-placement="bottom">
+
         <span class="sr-only">Open user menu</span>
         <img className="w-8 h-8 rounded-full" 
-        src="/docs/images/people/profile-picture-3.jpg" alt="user photo"/>
+        src={logoFlower} alt="user photo"/>
+
       </button>
       
       {/* <!-- Dropdown menu --> */}
-      <div className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+      {isMenuOpen && (
+      <div  className="absolute right-0 z-50 hidden my-4 text-base list-none bg-white divide-y
+       divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+        id="user-dropdown">
         <div className="px-4 py-3">
           <span className="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
           <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
@@ -60,6 +68,8 @@ const Header = () => {
           </li>
         </ul>
       </div>
+      
+      )}
       
       <button data-collapse-toggle="navbar-user" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-user" aria-expanded="false">
         <span className="sr-only">Toggle Menu</span>

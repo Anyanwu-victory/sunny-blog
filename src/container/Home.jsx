@@ -22,9 +22,7 @@ const Home = () => {
        </section>
       
        {/* Content */}
-       <div className="bg-white mt-0 w-full flex justify-center items-center mx-auto">
-      hello
-      </div>
+      
 
     </div>
     </>

@@ -11,6 +11,11 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'postedAt',
+      title: 'Posted at',
+      type: 'datetime',
+    }),
+    defineField({
       name: 'image',
       title: 'Image',
       type: 'image',

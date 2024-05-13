@@ -1,7 +1,8 @@
 import React, {useState,useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import { blog,author } from '../utils/data';
+import { blog } from '../utils/data';
 import client from '../client';
+import BlockContent from "@sanity/block-content-to-react";
 
 
 const Blog = ({}) => {
@@ -50,12 +51,16 @@ useEffect(() => {
           </a>
           
           <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-           
+           <BlockContent
+         blocks={post.summary}
+         projectId = "m4oqruh7"
+         dataset= "production"
+        />  
           </p>
 
           <Link to={`/blog/${post.slug.current}`}>
            <button
-            className="inline-block px-5 py-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg"
+            className="inline-block  px-5 py-3 text-sm font-medium text-center text-white bg-blue-700 rounded-lg"
            >
             Read about Blog
           </button>

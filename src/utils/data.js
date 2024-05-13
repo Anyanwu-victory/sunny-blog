@@ -4,6 +4,7 @@ export const blog = `*[_type == 'post' ] {
    title,
    slug,
    category,
+   summary,
    author -> {
     name,
    },
