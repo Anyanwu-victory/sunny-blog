@@ -42,7 +42,7 @@ useEffect(() => {
         </a>
         <div className="p-5">
        
-        <span className='tracking-loose text-[13px]'> {post.author.name}</span>  
+        <span className='tracking-loose text-[13px]'>   {new Date(post.date).toLocaleDateString()}</span>  
 
           <a href="#">
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">

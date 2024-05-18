@@ -15,19 +15,11 @@ export default defineType({
       title: 'Posted at',
       type: 'datetime',
     }),
+   
     defineField({
-      name: 'image',
-      title: 'Image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-
-    }),
-    defineField({
-        name: 'body',
+        name: 'comment',
         title: 'Comment',
-        type: 'blockContent',
+        type: 'string',
       }),
   ],
   preview: {

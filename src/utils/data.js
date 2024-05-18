@@ -2,6 +2,7 @@
 export const blog = `*[_type == 'post' ] {
     _id,
    title,
+   date,
    slug,
    category,
    summary,
@@ -14,7 +15,8 @@ export const blog = `*[_type == 'post' ] {
         _id,
         url
     },
-    alt
+    alt,
+    
    }
   }`
   
