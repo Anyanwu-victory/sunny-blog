@@ -7,6 +7,8 @@ import Footer from "./pages/Footer";
 import SinglePost from "./pages/SinglePost";
 import About from "./pages/About";
 import Error from "./pages/Error";
+import Login from "./pages/Login";
+import Signin from "./pages/Signin";
 
 function App() {
   return (
@@ -16,7 +18,9 @@ function App() {
              <Route path="/" element={<Home/>}/> 
              <Route path="/about" element={<About/>}/>     
              <Route path="/blog" element={<Blog/>}/> 
-             <Route path="/blog/:slug" element={<SinglePost/>}/> 
+             <Route path="/blog/:slug" element={<SinglePost/>}/>
+             <Route path="/login" element={<Login/>}/>
+             <Route path="/signin" element={<Signin/>}/> 
              <Route path="/footer" element={<Footer/>}/>   
              <Route path="*" element={<Error/>}/> 
          </Routes>

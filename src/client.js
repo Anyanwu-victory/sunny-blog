@@ -5,6 +5,7 @@ const client = createClient({
     dataset: "production",
     userCdn: true, 
     token: process.env.REACT_APP_SANITY_TOKEN,
+    ignoreBrowserTokenWarning: true,
     apiVersion: "2024-05-07"
 })
 
