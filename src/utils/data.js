@@ -32,3 +32,9 @@ export const author = `*[_type == "author" ] {
     about,
     info
   }`
+
+  export const category = `*[_type == "category"] {
+    _id,
+   title,
+   description,
+  }`

@@ -91,9 +91,15 @@ const SinglePost = () => {
             <Link to='/blog'>Read more articles</Link>
           </button>
           </div>
+           
+          <hr className='w-full h-2 mt-[2rem] fill-black'/>
 
           {/* Render comment component */}
           <div>
+            {/* 
+            I want for the differnet sigle post displayed each should show comments 
+            related to this category
+             */}
            <Comment/>
           </div>
           
