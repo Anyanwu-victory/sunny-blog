@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { category } from '../utils/data';
 import client from '../client';
+import Error from './Error';
 
 const CategoryList = () => {
     const[categories, setCategories] = useState([]);
@@ -13,8 +14,8 @@ const CategoryList = () => {
           const data = await client.fetch(query);
           setCategories(data);
         } catch (err) {
-          setError(err);
-          console.error('Error fetching data:', err);
+          setError(<Error/>);
+          console.error('Error fetching data:', <Error/>);
         }
       };
   
@@ -30,9 +31,9 @@ const CategoryList = () => {
 
     <div className='flex space-x-4'>
         <h1 className='text-1xl'>categories:</h1>
-        {categories.map((cat) => (
+        {categories.map((category) => (
           <button className='border max-w-full rounded-full px-4 py-1'>
-            {cat.title}</button>
+            {category.title}</button>
         ))}
 
         {[...Array(6).keys()].map((index) => (
@@ -46,4 +47,4 @@ const CategoryList = () => {
   )
 }
 
-export default CategoryList
+export default CategoryList;
