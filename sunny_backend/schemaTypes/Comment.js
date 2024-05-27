@@ -6,14 +6,21 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'name',
-      title: 'Name',
-      type: 'string',
+      name: 'user',
+      title: 'User',
+      type: 'reference',
+      to: [{type: 'user'}]
     }),
     defineField({
-      name: 'postedAt',
-      title: 'Posted at',
-      type: 'datetime',
+      name: 'category',
+      title: 'Category',
+      type: 'reference',
+      to: [{ type: 'category' }],
+    }),
+    defineField({
+      name: 'postedBy',
+      title: 'PostedBy',
+      type: 'postedBy',
     }),
    
     defineField({

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { blog } from '../utils/data';
 import client from '../client';
 import BlockContent from "@sanity/block-content-to-react";
+import CategoryList from './CategoryList';
 
 
 const Blog = ({}) => {
@@ -24,9 +25,11 @@ useEffect(() => {
       <h1 className="uppercase text-white text-4xl md:text-6xl tracking-widest mt-5 mb-10 text-center">
         Blogs Page
       </h1>
+     
+     <CategoryList/>
 
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 
-      lg:grid-cols-4"> 
+      lg:grid-cols-4" > 
        {posts.map((post) => (
         <article
         key={post.slug.current}

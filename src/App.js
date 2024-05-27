@@ -10,6 +10,7 @@ import Error from "./pages/Error";
 import Login from "./pages/Login";
 import Signin from "./pages/Signin";
 import Comment from "./pages/Comment";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
              <Route path="/blog" element={<Blog/>}/> 
              <Route path="/blog/:slug" element={<SinglePost/>}/>
              <Route path="/login" element={<Login/>}/>
+             <Route path="/contact" element={<Contact/>}/>
              <Route path="/comments" element={<Comment/>}/>
              <Route path="/signin" element={<Signin/>}/> 
              <Route path="/footer" element={<Footer/>}/>   

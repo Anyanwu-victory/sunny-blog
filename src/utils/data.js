@@ -38,3 +38,36 @@ export const author = `*[_type == "author" ] {
    title,
    description,
   }`
+
+  export const user = `*[_type == "user"] {
+    _id,
+    username,
+    email,
+    image
+  }`
+
+  export const comment = `*[_type == "comment"]{
+    _id,
+    comment,
+    postedBy->{
+      _id,
+      username,
+      image
+    }
+  }`
+
+  export const postDetails = (postId) => {
+    const query = `*[_type == "comment" && post._ref == "${postId}"]{
+      _id,
+      text,
+      user->{
+        _id,
+        username,
+        image
+      }
+    }`
+
+    return query;
+  };
+  
+  

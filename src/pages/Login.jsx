@@ -12,28 +12,36 @@ const Login = () => {
     const responseGoogle = (response) => {
         try {
             const responseDecoded = jwtDecode(response.credential);
-            console.log('Decoded response:', responseDecoded); // Add logging for debugging
+            console.log('Decoded response:', responseDecoded); 
 
             localStorage.setItem("user", JSON.stringify(responseDecoded));
     
-            const { name, sub, picture } = responseDecoded;
+            const { name, sub, email, picture } = responseDecoded;
+
+            // Log the user details to verify the values
+            console.log('User details:', { name, sub, email, picture });
     
             const doc = {
                 _id: sub,
                 _type: 'user',
-                userName: name,
+                username: name,
+                email: email,
                 image: picture
             };
+
+            // Log the document before sending it to Sanity
+            console.log('Sanity document:', doc);
     
             client.createIfNotExists(doc)
                 .then(() => {
+                    console.log('Document created successfully');
                     navigate('/', { replace: true });
                 })
                 .catch((error) => {
-                    console.error('Error creating document:', error); // Add error logging
+                    console.error('Error creating document:', error);
                 });
         } catch (error) {
-            console.error('Error decoding JWT:', error); // Add error logging
+            console.error('Error decoding JWT:', error);
         }
     };
   
