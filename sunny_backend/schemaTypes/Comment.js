@@ -5,12 +5,7 @@ export default defineType({
   title: 'Comment',
   type: 'document',
   fields: [
-    defineField({
-      name: 'user',
-      title: 'User',
-      type: 'reference',
-      to: [{type: 'user'}]
-    }),
+    
     defineField({
       name: 'category',
       title: 'Category',
@@ -20,9 +15,15 @@ export default defineType({
     defineField({
       name: 'postedBy',
       title: 'PostedBy',
-      type: 'postedBy',
+      type: 'reference',
+      to: {type: 'user'}
     }),
-   
+    defineField({
+      name: 'post',
+      title: 'Post',
+      type: 'reference',
+      to: {type: 'post'}, // Assuming you have a post schema
+    }),
     defineField({
         name: 'comment',
         title: 'Comment',

@@ -7,7 +7,7 @@ const Error = () => {
 
       <div className="flex flex-col items-center justify-center h-screen">
         <h1 className="uppercase font-bold text-4xl tracking-wide mb-5 md:text-6xl ">
-          Error 404 | Page Not Found
+          Error 404 | Page Not Found 
         </h1>
       <Link
         to="/"
