@@ -1,4 +1,4 @@
-import {eventType} from './eventType';
+import {eventType} from './mail';
 import author from './Author.js';
 import post from './post.js'
 import category from './Category.js';
