@@ -39,7 +39,7 @@ const Header = () => {
                 className="flex items-center  rtl:space-x-reverse md:ml-[-3rem]"
               >
                 <img src={logoSunny} className="h-14 " alt="Sunny Logo" />
-                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+                <span className="self-center text-2xl font-semibold whitespace-nowrap text-[#3e1943] dark:text-white">
                   Sunny
                 </span>
               </a>
@@ -113,13 +113,13 @@ const Header = () => {
     <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" 
   id="navbar-user">
     <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border
-         border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse
+         border-gray-100 rounded-lg uppercase bg-gray-50 md:space-x-8 rtl:space-x-reverse
           md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
       <Link to="/">
       <li>
         <a href="#" className="block py-2 px-3 text-white
-         bg-blue-700 rounded md:bg-transparent md:text-blue-700 
-         md:p-0 md:dark:text-yellow-500" aria-current="page">Home</a>
+         rounded md:bg-transparent md:text-[#3e1943]  font-bold
+         md:p-0 md:dark:text-white" aria-current="page">Home</a>
       </li>
       </Link>
 
@@ -127,8 +127,8 @@ const Header = () => {
       <li>
         <a href="#" className="block py-2 px-3 text-gray-900 rounded
          hover:bg-gray-100 md:hover:bg-transparent
-          md:hover:text-emerald-600 md:p-0 dark:text-white
-           md:dark:hover:text-emerald-900 dark:hover:bg-gray-700
+          md:hover:text-[#3e1943] hover:font-semibold md:p-0 dark:text-white
+             dark:hover:bg-gray-700
             dark:hover:text-white md:dark:hover:bg-transparent
              dark:border-gray-700DDDD">About Me</a>
       </li>
@@ -138,7 +138,7 @@ const Header = () => {
       <li>
         <a href="#" className="block py-2 px-3 text-gray-900 rounded
          hover:bg-gray-100 md:hover:bg-transparent
-          md:hover:text-blue-700 md:p-0 dark:text-white
+         md:hover:text-[#3e1943] hover:font-semibold md:p-0 dark:text-white
            md:dark:hover:text-emerald-900 dark:hover:bg-gray-700
             dark:hover:text-white md:dark:hover:bg-transparent
              dark:border-gray-700">Blogs</a>
@@ -150,7 +150,7 @@ const Header = () => {
         <a href="#" 
         class="block py-2 px-3 text-gray-900 rounded
          hover:bg-gray-100 md:hover:bg-transparent 
-         md:hover:text-blue-700 md:p-0 dark:text-white
+         md:hover:text-[#3e1943] hover:font-semibold md:p-0 dark:text-white
           md:dark:hover:text-blue-500 dark:hover:bg-gray-700
            dark:hover:text-white md:dark:hover:bg-transparent
             dark:border-gray-700">Contact</a>

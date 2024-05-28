@@ -30,11 +30,11 @@ const CategoryList = ({ setSelectedCategory }) => {
   return (
     <>
 
-    <div className='flex space-x-4 justify-center'>
-        <h1 className='text-1xl'>categories:</h1>
+    <div className='flex space-x-4 justify-center text-white '>
+        <h1 className='text-1xl font-bold'>categories:</h1>
         {categories.map((category) => (
-          <button key={category._id}  onClick={() => setSelectedCategory(category)}
-          className='border max-w-full rounded-full px-4 py-1'>
+          <button key={category._id} 
+          className='border max-w-full uppercase text-[12px] bg-[#76d1c6] rounded-full md:px-4 md:py-1 py-[1px] px-2'>
             {category.title}</button>
         ))}
 

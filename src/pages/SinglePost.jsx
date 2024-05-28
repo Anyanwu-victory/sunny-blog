@@ -53,7 +53,7 @@ const SinglePost = () => {
       ) : (
         <section className='px-5 xl:max-w-6xl xl:mx-auto '>
           <div>
-          <h1 className='uppercase font-bold text-4xl text-center lg:text-6xl'>
+          <h1 className='uppercase text-[#3e1943] font-bold text-4xl text-center lg:text-6xl'>
             {singlePost.title}
           </h1>
           {singlePost.mainImage && singlePost.mainImage.asset && (
@@ -87,7 +87,9 @@ const SinglePost = () => {
               dataset='production'
             />
           </div>
-          <button className='py-2 px-6 rounded shadow text-white bg-black hover:bg-transparent border-2 border-black transition-all duration-500 hover:text-black font-bold'>
+          <button className='py-2 px-6 rounded shadow
+           text-[#3e1943] bg-white hover:bg-[#3e1943] hover:text-white 
+           border-2 border-black transition-all duration-500 font-bold'>
             <Link to='/blog'>Read more articles</Link>
           </button>
           </div>
