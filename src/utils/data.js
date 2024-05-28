@@ -69,5 +69,13 @@ export const author = `*[_type == "author" ] {
 
     return query;
   };
+
+  
+  export const mail = `*[_type == "mail"]{
+    _id,
+    name,
+    email,
+    message
+  }`
   
   

@@ -53,7 +53,7 @@ const SinglePost = () => {
       ) : (
         <section className='px-5 xl:max-w-6xl xl:mx-auto '>
           <div>
-          <h1 className='uppercase text-[#3e1943] font-bold text-4xl text-center lg:text-6xl'>
+          <h1 className='uppercase font-[cursive] text-[#3e1943] font-bold text-4xl text-center lg:text-6xl'>
             {singlePost.title}
           </h1>
           {singlePost.mainImage && singlePost.mainImage.asset && (
@@ -64,7 +64,7 @@ const SinglePost = () => {
               className='md:h-1/3 rounded-t my-6'
             />
           )}
-          <span className='my-3 inline-flex space-x-4'>
+          <span className='my-3 inline-flex space-x-4 font-[cursive]'>
             {singlePost.author && singlePost.author.image &&
              singlePost.author.image.asset && (
               <img
@@ -80,7 +80,7 @@ const SinglePost = () => {
               <h6 className='text-1xl'>Posted on {singlePost.date}</h6>
               </span>
           </span>
-          <div className='md:leading-2 my-6'>
+          <div className='md:leading-2 my-6 font-[cursive]'>
             <BlockContent
               blocks={singlePost.body}
               projectId='m4oqruh7'

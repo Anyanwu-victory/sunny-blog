@@ -33,7 +33,7 @@ useEffect(() => {
        {posts.map((post) => (
         <article
         key={post.slug.current}
-        className="max-w-md mx-auto bg-[#76d1c6] border
+        className="max-w-md mx-auto bg-slate-400 border
          border-gray-200 rounded-lg shadow"
       >
         <a href="#">
@@ -48,7 +48,7 @@ useEffect(() => {
         <span className='tracking-loose text-[13px]'>   {new Date(post.date).toLocaleDateString()}</span>  
 
           <a href="#">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-[#3e1943] dark:text-white">
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-white dark:text-white">
               {post.title}
             </h5>
           </a>

@@ -1,6 +1,6 @@
 import {defineField, defineType} from 'sanity'
 
-export const eventType = defineType({
+export default defineType({
   name: 'mail',
   title: 'Mail',
   type: 'document',

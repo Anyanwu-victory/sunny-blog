@@ -1,4 +1,3 @@
-import {eventType} from './mail';
 import author from './Author.js';
 import post from './post.js'
 import category from './Category.js';
@@ -7,6 +6,7 @@ import comment from './Comment.js';
 import user from './user.js';
 import save from './save.js';
 import postedBy from './postedBy.js';
+import mail from './mail.js';
 
 export const schemaTypes = [
     author,
@@ -16,7 +16,8 @@ export const schemaTypes = [
     comment,
     user,
     save,
-    postedBy
+    postedBy,
+    mail
 
 ]
 

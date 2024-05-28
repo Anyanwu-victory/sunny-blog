@@ -34,7 +34,7 @@ const CategoryList = ({ setSelectedCategory }) => {
         <h1 className='text-1xl font-bold'>categories:</h1>
         {categories.map((category) => (
           <button key={category._id} 
-          className='border max-w-full uppercase text-[12px] bg-[#76d1c6] rounded-full md:px-4 md:py-1 py-[1px] px-2'>
+          className='border max-w-full uppercase text-[12px] bg-slate-400  rounded-full md:px-4 md:py-1 py-[1px] px-2'>
             {category.title}</button>
         ))}
 
