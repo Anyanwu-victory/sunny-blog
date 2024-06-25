@@ -1,181 +1,189 @@
-// UserForm.js
-import React, { useState } from 'react';
-import { client } from './client';
-
-const UserForm = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const doc = {
-      _type: 'user',
-      name: name,
-      email: email,
-    };
-
-    try {
-      await client.create(doc);
-      alert('User added successfully!');
-    } catch (error) {
-      console.error('Error adding user:', error);
-      alert('Failed to add user');
-    }
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Name:</label>
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Email:</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <button type="submit">Submit</button>
-    </form>
-  );
-};
-
-export default UserForm;
-
-
-// App.js
-import React from 'react';
-import UserForm from './UserForm';
-
-const App = () => {
-  return (
-    <div className="App">
-      <h1>Save User Input to Sanity</h1>
-      <UserForm />
-    </div>
-  );
-};
-
-export default App;
-
-
-
-
-import React, { useState, useEffect } from 'react';
+import React, { useState } from "react";
 import logoSunny from "../assets/images/logoSunny.png";
-import { useParams } from 'react-router-dom';
-import { fetchUser } from '../utils/fetchUser';
-import client from '../client';
+import { Link } from "react-router-dom";
+import Login from "../pages/Login";
+import SignInForm from "../pages/Signin";
+import 'flowbite';
+import 'flowbite-react';
+import { fetchUser } from "../utils/fetchUser";
 
-const Comment = () => {
-  const [user, setUser] = useState(null);
-  const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState('');
+const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isListOpen, setIsListOpen] = useState(false);
+  const user = fetchUser();
+  const [showSignIn, setShowSignIn] = useState(false);
 
-  // Get the postId from the URL parameters
-  const { postId } = useParams();
-
-  useEffect(() => {
-    const fetchedUser = fetchUser();
-    setUser(fetchedUser);
-    const storedComments = JSON.parse(localStorage.getItem(`comments-${postId}`)) || [];
-    setComments(storedComments);
-    fetchComments();
-  }, [postId]);
-
-  const fetchComments = async () => {
-    const query = `*[_type == "comment" && post._ref == "${postId}"]{
-      _id,
-      comment,
-      postedBy->{
-        _id,
-        username,
-        image
-      }
-    }`;
-    const data = await client.fetch(query);
-    setComments(data);
-    localStorage.setItem(`comments-${postId}`, JSON.stringify(data));
+  const toggleSignIn = () => {
+    setShowSignIn(!showSignIn);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!user) {
-      alert('Please sign in to comment');
-      return;
-    }
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
-    const doc = {
-      _type: 'comment',
-      comment: newComment,
-      postedBy: {
-        _type: 'reference',
-        _ref: user.sub,
-      },
-      post: {
-        _type: 'reference',
-        _ref: postId,
-      },
-    };
-
-    const createdComment = await client.create(doc);
-    const newCommentData = {
-      _id: createdComment._id,
-      comment: newComment,
-      postedBy: {
-        _id: user.sub,
-        username: user.username,
-        image: user.image,
-      },
-    };
-    setNewComment('');
-    const updatedComments = [...comments, newCommentData];
-    setComments(updatedComments);
-    localStorage.setItem(`comments-${postId}`, JSON.stringify(updatedComments));
+  const toggleList = () => {
+    setIsListOpen(!isListOpen);
   };
 
   return (
-    <div className='mx-5 md:mx-8'>
-      <h1 className='font-bold text-3xl mb-6'>Comments</h1>
+    <header>
+      <nav className="bg-white font-[cursive] border-gray-200 dark:bg-gray-900">
+        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+          {/* Logo */}
+          <Link to="/" className="flex items-center rtl:space-x-reverse md:ml-[-3rem]">
+            <img src={logoSunny} className="h-14" alt="Sunny Logo" />
+            <span className="self-center text-2xl font-semibold whitespace-nowrap text-[#3e1943] dark:text-white">
+              Sunny
+            </span>
+          </Link>
 
-      <div className='comment-content border border-emerald-700 max-h-full h-full p-[2rem] space-y-7'>
-        {comments.map((comment) => (
-          <div key={comment._id} className='flex space-x-4 flex-col border border-zinc-300 p-[1rem] bg-slate-500 text-white'>
-            <div className='flex space-x-3'>
-              <img src={comment.postedBy?.image || logoSunny} className='w-8 h-8 border rounded-full border-zinc-500' alt="user-profile" />
-              <h4>{comment.postedBy?.username}</h4>
-            </div>
-            <p className='text-start pt-4'>{comment.comment}</p>
+          {/* User Profile */}
+          <div className="relative flex items-center md:order-3 space-x-3 md:space-x-0 rtl:space-x-reverse">
+            <button
+              onClick={toggleMenu}
+              type="button"
+              className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-[#3e1943] dark:focus:ring-gray-600"
+              aria-expanded="false"
+            >
+              <span className="sr-only">Open user menu</span>
+              <img
+                className="w-8 h-8 rounded-full"
+                src={user.picture}
+                alt="user photo"
+              />
+            </button>
+
+            {isMenuOpen && (
+              <div
+                className="absolute right-0 top-0.5 z-50 mt-20 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+                id="user-dropdown"
+              >
+                <div className="px-4 py-3">
+                  <span className="block text-sm text-gray-900 dark:text-white">
+                  {user ? user.name : "No name"}
+                  </span>
+                  <span className="block text-sm text-gray-500 truncate dark:text-gray-400">
+                    {user ? user.email : "No mail"}
+                  </span>
+                </div>
+                <ul className="py-2" aria-labelledby="user-menu-button">
+                  <li>
+                    <Link
+                      to="/"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      Home
+                    </Link>
+                  </li>
+                  <li>
+                    <Login>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      >
+                        Sign in
+                      </a>
+                    </Login>
+                  </li>
+                  <li>
+                    <button
+                      onClick={toggleSignIn}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      Sign In with Email
+                    </button>
+                    {showSignIn && <SignInForm toggleSignIn={toggleSignIn} />}
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      Sign out
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            )}
+
+           <div className="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+            <button
+              data-collapse-toggle="navbar-user"
+              onClick={toggleList}
+              type="button"
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              aria-controls="navbar-user"
+              aria-expanded={isListOpen ? "true" : "false"}
+            >
+              <span className="sr-only">Toggle Menu</span>
+              <svg
+                className="w-5 h-5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 17 14"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M1 1h15M1 7h15M1 13h15"
+                />
+              </svg>
+            </button>
           </div>
-        ))}
-      </div>
 
-      {user && (
-        <div className='flex mt-6 p-0 bottom-0 top-0 bg-white sticky '>
-          <img src={user.image || logoSunny} className='w-20 h-20' alt="user-profile" />
-          <input
-            type='text'
-            placeholder='Add to the discussion'
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            className='flex-1 h-[4rem] md:w-full border text-start sticky border-emerald-500 p-2'
-          />
-          <button
-            onClick={handleSubmit}
-            className='text-yellow-300 text-[18px] left-[58rem] pt-5 font-semibold absolute px-6'>
-            Submit
-          </button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          {/* Laptop Menu */}
+          
+            <div
+            className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+            id="user-dropdown"
+          >
+            
+            <ul className="flex flex-col font-medium p-6 md:p-0 mt-4 border border-gray-100 rounded-lg uppercase bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 items-center md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+              <li>
+                <Link
+                  to="/"
+                  className="block py-2 px-3 text-white rounded md:bg-transparent md:text-[#3e1943] font-bold md:p-0 md:dark:text-white"
+                  aria-current="page"
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/about"
+                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#3e1943] hover:font-semibold md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  About Me
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/blog"
+                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#3e1943] hover:font-semibold md:p-0 dark:text-white md:dark:hover:text-emerald-900 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  Blogs
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/contact"
+                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-[#3e1943] hover:font-semibold md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  Contact
+                </Link>
+              </li>
+            </ul>
+          </div>          
         </div>
-      )}
-    </div>
+      </nav>
+    </header>
   );
 };
 
-export default Comment;
+export default Header;
