@@ -31,9 +31,9 @@ const Header = () => {
 
   return (
     <>
-      <div className="relative">
+      <div className="relative pb-[5rem]">
         <nav className="absolute top-0 left-0 w-full bg-transparent
-         border-gray-200 text-white z-15">
+         border-gray-200 text-black z-10">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4 py-7">
             
             {/* Logo on the left */}
@@ -86,14 +86,14 @@ const Header = () => {
 
             {/* Main Navigation Menu */}
             <div
-              className={`${isListOpen ? 'block' : 'hidden'} w-full md:block md:w-auto`}
+              className={`${isListOpen ? 'block bg-yellow-300' : 'hidden'} w-full text-black md:block md:w-auto`}
               id="navbar-hamburger"
             >
               <ul className="font-medium flex flex-col md:flex-row md:space-x-8 md:items-center text-center">
                 <li>
                   <Link
                     to='/'
-                    className="block py-2 px-3 text-white uppercase md:text-white md:p-0"
+                    className="block py-2 px-3 text-black uppercase md:text-black md:p-0"
                   >
                     Home
                   </Link>
@@ -101,7 +101,7 @@ const Header = () => {
                 <li>
                   <Link
                     to='/about'
-                    className="block py-2 px-3 text-white uppercase md:text-white md:p-0"
+                    className="block py-2 px-3 text-white uppercase md:text-black md:p-0"
                   >
                     About
                   </Link>
@@ -109,7 +109,7 @@ const Header = () => {
                 <li>
                   <Link
                     to='/blog'
-                    className="block py-2 px-3 text-white uppercase md:text-white md:p-0"
+                    className="block py-2 px-3 text-white uppercase md:text-black md:p-0"
                   >
                     Blog
                   </Link>
@@ -117,7 +117,7 @@ const Header = () => {
                 <li>
                   <Link
                     to='/contact'
-                    className="block py-2 px-3 text-white uppercase md:text-white md:p-0"
+                    className="block py-2 px-3 text-white uppercase md:text-black md:p-0"
                   >
                     Contact Us
                   </Link>

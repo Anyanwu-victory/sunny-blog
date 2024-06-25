@@ -33,7 +33,7 @@ const Contact = () => {
 
   return (
     <>
-      <section className="bg-[#f0d829] md:flex md:flex-row flex-col min-h-screen justify-center">
+      <section className="bg-[#f0d829]  md:flex md:flex-row flex-col min-h-screen justify-center">
         <div className="justify-center  items-center mt-10 p-12 h-[40rem] mx-3 md:w-[36rem] lg:w-[40rem]
          bg-slate-400">
           <legend>
