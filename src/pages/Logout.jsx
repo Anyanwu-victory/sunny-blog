@@ -1,10 +1,18 @@
-import React from 'react';
-import { googleLogout } from '@react-oauth/google';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Logout = () => {
-  return (
-    <div>Logout</div>
-  )
-}
+  const navigate = useNavigate();
 
-export default Logout
+  useEffect(() => {
+    // Clear user data from localStorage
+    localStorage.removeItem('user');
+
+    // Redirect to home page
+    navigate('/', { replace: true });
+  }, [navigate]);
+
+  return null;
+};
+
+export default Logout;

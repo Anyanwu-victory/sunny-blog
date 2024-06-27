@@ -43,7 +43,11 @@ export const author = `*[_type == "author" ] {
     _id,
     username,
     email,
-    image
+    mainImage {
+      asset -> {
+        url
+      }
+    }
   }`
 
   export const comment = `*[_type == "comment"]{
