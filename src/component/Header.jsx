@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import sunny from '../assets/images/flower.png';
 import Login from "../pages/Login";
@@ -9,29 +9,23 @@ import 'flowbite-react';
 import client from "../client";
 import { fetchUser } from "../utils/fetchUser";
 
-
 const Header = () => {
-  // const user = fetchUser();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isListOpen, setIsListOpen] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
   const [user, setUser] = useState([]);
 
-  // Toggle the SignInForm visibility
   const toggleSignIn = () => {
     setShowSignIn(!showSignIn);
   };
 
-  // Toggle the main menu visibility
   const toggleList = () => {
     setIsListOpen(!isListOpen);
   }
 
-  // Toggle the user menu visibility
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-
 
   useEffect(() => {
     client.fetch(fetchUser)
@@ -41,14 +35,13 @@ const Header = () => {
       .catch(console.error);
   }, []);
 
-console.log(user);
+  console.log(user);
 
   return (
     <>
       <div className="relative pb-[5rem]">
         <nav className="absolute top-0 left-0 w-full bg-transparent border-gray-200 text-black z-10">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4 py-7">
-            
             {/* Logo on the left */}
             <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
               <img src={sunny} className="h-8" alt="star" />
@@ -82,7 +75,7 @@ console.log(user);
               </button>
 
               {/* User menu toggle */}
-               <button
+              <button
                 onClick={toggleMenu}
                 type="button"
                 className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-[#3e1943] dark:focus:ring-gray-600"
@@ -91,15 +84,15 @@ console.log(user);
                 <span className="sr-only">Open user menu</span>
                 <img
                   className="w-8 h-8 rounded-full"
-                  src={user.picture}
+                  src={user.picture || (user.mainImage && user.mainImage.asset && user.mainImage.asset.url)}
                   alt="user face"
                 />
-              </button> 
+              </button>
             </div>
 
             {/* Main Navigation Menu */}
             <div
-              className={`${isListOpen ? ' block bg-yellow-300 h-[11rem]' : 'hidden'} w-full text-black md:block md:w-auto`}
+              className={`${isListOpen ? 'block bg-yellow-300 h-[11rem]' : 'hidden'} w-full text-black md:block md:w-auto`}
               id="navbar-hamburger"
             >
               <ul className="font-medium flex flex-col md:flex-row md:space-x-8 md:items-center text-center">
@@ -111,7 +104,6 @@ console.log(user);
                     Home
                   </Link>
                 </li>
-                
                 <li>
                   <Link
                     to='/blog'
@@ -123,27 +115,21 @@ console.log(user);
                 <li>
                   <Link
                     to='/contact'
-                    className="block py-2 px-3 mb-[1rem] text-white
-                     uppercase md:text-black md:p-0 lg:mb-0"
+                    className="block py-2 px-3 mb-[1rem] text-white uppercase md:text-black md:p-0 lg:mb-0"
                   >
                     Contact Us
                   </Link>
                 </li>
-
                 <li>
                   <Link to="/create"
-                  className=" py-3 px-6 mt-6   bg-black w-[6rem] border rounded-md  text-white uppercase
-                   md:text-black md:p-0 lg:mt-0 lg:w-[9rem] lg:text-white lg:py-3 
-                   lg:rounded-lg lg:px-5 "
+                    className="py-3 px-6 mt-6 bg-black w-[6rem] border rounded-md text-white uppercase md:text-black md:p-0 lg:mt-0 lg:w-[9rem] lg:text-white lg:py-3 lg:rounded-lg lg:px-5"
                   >
-                  <button> 
-                     Create 
-                  </button>
+                    <button>Create</button>
                   </Link>
                 </li>
-
               </ul>
             </div>
+
             {/* User Profile Menu for Desktop */}
             <div className="hidden md:flex items-center space-x-3 rtl:space-x-reverse">
               <button
@@ -153,41 +139,39 @@ console.log(user);
                 aria-expanded="false"
               >
                 <span className="sr-only">Open user menu</span>
-
                 {user && user.length > 0 ? (
-        user.map((item, index) => (
-          <a key={index} href={item.url}>
-            <img
-              className="w-8 h-8 rounded-full"
-              src={item.mainImage.asset.url}
-              alt="user face"
-            />
-          </a>
-        ))
-      ) : (
-      
-        <span className="text-white py-3 px-2">Create your presence</span>
-      )}               
-      </button>
+                  user.map((item, index) => (
+                    <a key={index} href={item.url}>
+                      <img
+                        className="w-8 h-8 rounded-full"
+                        src={item.image || ''}
+                        alt="user face"
+                      />
+                    </a>
+                  ))
+                ) : (
+                  <span className="text-white py-3 px-2">Create your presence</span>
+                )}
+              </button>
             </div>
           </div>
+
           {isMenuOpen && (
             <div className="absolute right-0 top-0 mt-20 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
               <div className="px-4 py-3">
                 <span className="block text-sm text-gray-900 dark:text-white">
-                 
-                  {user && user.length > 0  ? (
-                   user.map((item, index) => (
-                       <span className="block text-sm text-gray-500 truncate dark:text-gray-400">
-                        {user ? user.username : "No mail"}
-                </span> 
-                   )) 
-                  ): (
-                   <p>No user</p>
+                  {user && user.length > 0 ? (
+                    user.map((item, index) => (
+                      <span key={index} className="block text-sm text-gray-500 truncate dark:text-gray-400">
+                        {item.username || "No username"}
+                      </span>
+                    ))
+                  ) : (
+                    <p>No user</p>
                   )}
                 </span>
                 <span className="block text-sm text-gray-500 truncate dark:text-gray-400">
-                  {user ? user.email : "No mail"}
+                  {user.email || "No mail"}
                 </span>
               </div>
               <ul className="py-2" aria-labelledby="user-menu-button">
@@ -199,52 +183,37 @@ console.log(user);
                     Home
                   </Link>
                 </li>
-
                 <li>
                   <Link to="/about"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
-                    Dasboard
+                    Dashboard
                   </Link>
                 </li>
-
                 <li>
                   <Link to="/create"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                  >
-                    Create 
-                  </Link>
-                </li>
-                
-                <li>
-                <Login>
-                  <Link
-                    to="/login"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
-                    Sign in
+                    Create
                   </Link>
+                </li>
+                <li>
+                  <Login>
+                    <Link
+                      to="/login"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      Sign in
+                    </Link>
                   </Login>
                 </li>
-                
-                {/* <li>
-                  <button
-                    onClick={toggleSignIn}
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                  >
-                    Sign In with Email
-                  </button>
-                  {showSignIn && <SignInForm toggleSignIn={toggleSignIn} />}
-                </li> */}
                 <li>
-                  
                   <Link
                     to="/logout"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
                     Sign out
                   </Link>
-                
                 </li>
               </ul>
             </div>

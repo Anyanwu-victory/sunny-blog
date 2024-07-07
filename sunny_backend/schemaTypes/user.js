@@ -18,5 +18,6 @@ export default {
             title: 'Image',
             type: 'string'
         },
+       
     ]
 }
