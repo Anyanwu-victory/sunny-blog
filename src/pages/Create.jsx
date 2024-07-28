@@ -18,7 +18,7 @@ const Create = ({ user }) => {
   const [wrongImageType, setWrongImageType] = useState(false);
 
   const navigate = useNavigate();
-
+ 
   const uploadImage = (e) => {
     const { type, name } = e.target.files[0];
 
