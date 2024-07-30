@@ -437,3 +437,137 @@ const Header = () => {
 };
 
 export default Header;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+about 
+
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import person from '../assets/person.jpg'
+import client from '../client'; // Make sure to have your Sanity client set up correctly
+import { fetchUser } from '../utils/fetchUser'; // Utility function to fetch user data
+
+const About = () => {
+
+  const [user, setUser] = useState(null);
+  const [activeSection, setActiveSection] = useState('home');
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (storedUser) {
+      fetchUser(storedUser.sub)
+        .then(data => {
+          setUser(data);
+        })
+        .catch(console.error);
+    }
+  }, []);
+
+  if (!user) {
+    return <div>Loading...</div>; // Show a loading state while fetching user data
+  }
+
+  return (
+    <>
+      <section className='bg-[#f0d829] mt-0 w-full flex
+       md:h-[43.4rem] h-[54rem] 
+       mx-auto md:flex-wrap md:justify-normal'>
+        <div className='md:mx-14 md:flex mx-5   md:mt-[5rem]'>
+          <img
+            src={user.image || person}
+            alt={user.username || 'User Image'}
+            className='object-cover border rounded-full bg-no-repeat
+             w-[5rem] h-[5rem]'
+          />
+          <div className=' mx-5 justify-center 
+            mt-15 space-x-3 md:flex md:justify-evenly md'>
+             <h1 className=' font-semibold leading-loose tracking-wide 
+             text-[#3e1943] md:mr-[13rem]
+            md:text-[20px] text-3xl text-center '>
+              {user.username || 'Anyanwu micheal '}
+              
+            </h1>
+
+            <button className='py-3 px-6 rounded-full shadow flex 
+            justify-center text-[#3e1943] text-center bg-white 
+            hover:bg-[#3e1943] border-2  lg:mx-[12rem] 
+            border-[#3e1943] md:h-[3rem] transition-all duration-500
+             hover:text-white font-bold'>Follow </button>
+
+             {/* Email */}
+          </div>
+
+          
+        </div>
+
+       
+        <div className='mx-14 mt-[-6rem] font-bold
+         space-x-4 text-[#3e1943]'>
+          <span onClick={() => setActiveSection('home')} 
+          className='cursor-pointer'>Home</span>
+          <span onClick={() => setActiveSection('blogs')} 
+          className='cursor-pointer'>Blogs</span>
+          <span onClick={() => setActiveSection('about')}
+           className='cursor-pointer'>About</span>
+           <hr className='w-full'></hr>
+        </div>
+            
+        <div className='mx-12 mt-12 bg-white w-[50rem]'>
+          {activeSection === 'home' && (
+            <div>
+              <h2 className='text-2xl font-bold'>Home</h2>
+              <p>Welcome to the home section. Here you can find the latest updates and news.</p>
+            </div>
+          )}
+          {activeSection === 'blogs' && (
+            <div>
+              <h2 className='text-2xl font-bold'>Blogs</h2>
+              <p>Read our latest blogs and articles.</p>
+            </div>
+          )}
+          {activeSection === 'about' && (
+            <div>
+              <h2 className='text-2xl font-bold'>About</h2>
+              <p>Learn more about us and what we do.</p>
+            </div>
+          )}
+        </div>
+
+
+        
+       
+
+        {/* <h4 className='uppercase text-center text-black'>
+              Programmer, Tech Enthusiast, Blogger, Student
+            </h4>
+            <p className='bio leading-loose md:pt-10 md:mx-[2rem] md:pb-[2rem] pb-[1rem] text-[#3e1943] text-center'>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum repellat sequi, modi culpa inventore fugit quia, perspiciatis hic earum temporibus sunt atque repudiandae doloremque! Iusto nostrum non possimus veniam eveniet.
+            </p>
+            <button className='py-2 px-6 rounded shadow flex 
+            justify-center text-[#3e1943] text-center bg-white 
+            hover:bg-[#3e1943] border-2 mx-[8rem] lg:mx-[12rem] 
+            border-[#3e1943] transition-all duration-500
+             hover:text-white font-bold'>
+              <Link to='/blog'>Read my Blogs</Link>
+            </button> */}
+
+      </section>
+    </>
+  );
+};
+
+export default About;

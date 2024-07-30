@@ -12,6 +12,7 @@ node_modules
 /build
 
 .env
+.txt
 
 # misc
 .DS_Store

@@ -1,47 +1,90 @@
-import React from 'react'
-import Person from '../assets/images/bannerImgOne.jpg';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import personPlaceholder from '../assets/person.jpg';
+import client from '../client'; // Sanity client setup
+import { fetchUser } from '../utils/fetchUser'; // Utility to fetch user data
 
-const About = () => {
+const UserProfile = () => {
+  const [user, setUser] = useState(null);
+  const [articles, setArticles] = useState([]);
+  const [activeSection, setActiveSection] = useState('home');
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (storedUser) {
+      fetchUser(storedUser.sub)
+        .then(data => setUser(data))
+        .catch(console.error);
+      
+      // Fetch user's articles
+      client.fetch(`*[_type == "article" && author._ref == "${storedUser.sub}"]`)
+        .then(data => setArticles(data))
+        .catch(console.error);
+    }
+  }, []);
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <>
-      <section className=' bg-[#f0d829] mt-0 w-full flex
-       justify-center md:h-[43.4rem] h-[54rem] items-center mx-auto md:flex  md:justify-normal '>
-       <div className=' md:mx-14  md:flex mx-5 md:my-[7rem] '>
-        <img src={Person} 
-        className=' object-cover bg-no-repeat h-[25rem]  md:h-[37rem] 
-        md:ml-[3.3rem] md:pr-[3rem] md:w-1/2'/>
+    <section className="profile-page">
+      <div className="profile-header bg-[#f0d829] w-full flex justify-center items-center">
+        <div className="profile-info flex flex-col items-center mx-auto md:flex-row">
+          <img
+            src={user.image || personPlaceholder}
+            alt={user.username || 'User Image'}
+            className="profile-image w-24 h-24 object-cover rounded-full"
+          />
+          <div className="profile-details mx-5 mt-5 text-center md:mt-0 md:text-left">
+            <h1 className="text-3xl font-bold text-[#3e1943]">{user.username || 'User Name'}</h1>
+            <p className="text-black">{user.bio || 'Bio not available'}</p>
+          </div>
+        </div>
+      </div>
 
-        
-       <div className='md:ml-[3rem] mx-5 justify-center md:w-1/2 items-center 
-       mt-10 space-y-3 md:space-y-4 '>
-           <h1 className='uppercase font-bold  text-[#3e1943] md:text-6xl text-3xl text-center'> Victory Smithe</h1>
-           <h4 className='uppercase text-center text-black'>Programmer, Tech Entiuist , Blogger, Student</h4>
-           <p className='bio leading-loose md:pt-10 md:mx-[2rem] md:pb-[2rem] pb-[1rem]  text-[#3e1943] text-center '>
-           Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-        Harum repellat sequi, modi culpa inventore fugit quia, 
-        perspiciatis hic earum temporibus sunt atque repudiandae doloremqu
-        e! Iusto nostrum non possimus veniam eveniet .
-           </p>
-           
-       
+      <div className="profile-content mx-14 mt-8 space-y-4">
+        <nav className="profile-nav text-[#3e1943] font-bold space-x-4 text-center">
+          <span onClick={() => setActiveSection('home')} className="cursor-pointer">Home</span>
+          <span onClick={() => setActiveSection('blogs')} className="cursor-pointer">Blogs</span>
+          <span onClick={() => setActiveSection('about')} className="cursor-pointer">About</span>
+        </nav>
 
-        <button className="py-2 px-6 rounded shadow flex justify-center   text-[#3e1943] text-center
-         bg-white hover:bg-[#3e1943] border-2 mx-[8rem] lg:mx-[12rem] border-[#3e1943]
-          transition-all duration-500
-       hover:text-white font-bold">
-        <Link to="/blog"> Read my Blogs</Link>
-      </button>
-  
+        <div className="profile-articles">
+          {activeSection === 'home' && (
+            <div>
+              <h2 className="text-2xl font-bold">Home</h2>
+              <p>Welcome to the home section. Here you can find the latest updates and news.</p>
+            </div>
+          )}
+          {activeSection === 'blogs' && (
+            <div>
+              <h2 className="text-2xl font-bold">Blogs</h2>
+              {articles.length > 0 ? (
+                <ul>
+                  {articles.map((article) => (
+                    <li key={article._id} className="article-item">
+                      <Link to={`/article/${article.slug.current}`}>
+                        {article.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No articles published yet.</p>
+              )}
+            </div>
+          )}
+          {activeSection === 'about' && (
+            <div>
+              <h2 className="text-2xl font-bold">About</h2>
+              <p>Learn more about us and what we do.</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+};
 
-
-       </div>
-       </div>
-       
-      </section>
-        
-    </>
-  )
-}
-
-export default About
+export default UserProfile;

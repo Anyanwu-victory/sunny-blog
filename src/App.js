@@ -12,6 +12,7 @@ import Signin from "./pages/Signin";
 import Comment from "./pages/Comment";
 import Contact from "./pages/Contact";
 import Create from "./pages/Create";
+import Logout from "./pages/Logout";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
              <Route path="/signin" element={<Signin/>}/> 
              <Route path="/footer" element={<Footer/>}/> 
              <Route path="/create" element={<Create/>}/>  
+             <Route path="/logout" element={<Logout/>}/>
              <Route path="*" element={<Error/>}/> 
          </Routes>
     

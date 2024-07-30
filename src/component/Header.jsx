@@ -4,7 +4,7 @@ import sunny from '../assets/images/flower.png';
 import 'flowbite';
 import 'flowbite-react';
 import client from "../client";
-import { fetchUser } from "../utils/fetchUser";
+import { fetchData } from "../utils/fetchData";
 import Login from "../pages/Login";
 import Logout from "../pages/Logout";
 
@@ -28,7 +28,7 @@ const Header = () => {
   };
 
   useEffect(() => {
-    const fetchedUser = fetchUser();
+    const fetchedUser = fetchData();
     if (fetchedUser) {
       setUser(fetchedUser);
     }
@@ -194,12 +194,14 @@ const Header = () => {
                   </Login>
                 </li>
                 <li>
+                  
                   <Link
                     to="/logout"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
                     Sign out
                   </Link>
+                  
                 </li>
               </ul>
             </div>
